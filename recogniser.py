@@ -1,5 +1,7 @@
+try: from wekapy import *
+except ImportError: from .wekapy import *
+
 from typing import List
-from .wekapy import *
 import uuid
 import os
 

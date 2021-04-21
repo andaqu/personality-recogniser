@@ -68,23 +68,16 @@ class Model:
 
     # Generate predictions from the trained model from test features in an ARFF file
     def predict(self, test_file=None, instances=None, model_file=None):
-        print(">>> test0")
 
         if test_file is None and instances is None:
             self.create_arff(self.samples, "test")
-
-        print(">>> test")
 
         options = ["java", "-Xmx{}M".format(str(self.max_memory))]
         if self.classpath is not None:
             options.extend(["-cp", self.classpath])
         options.extend(["weka.classifiers." + self.classifier, "-T", self.test_file, "-l", self.model_file, "-p", "0", "-c", "1"])
 
-        print(options)
-
         process_output, self.time_taken = run_process(options)
-
-        print(">>> test3")
 
         lines = process_output.split("\n")
         instance_predictions = {}

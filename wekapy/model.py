@@ -70,34 +70,12 @@ class Model:
     def predict(self, test_file=None, instances=None, model_file=None):
         print(">>> test0")
 
-        if self.verbose:
-            print("Generating predictions for your test set...")
-        if model_file is not None:
-            self.load_model(model_file)
-        if not self.trained:
-            raise WekaPyException("The classifier has not yet been trained. Please call train() first")
-        if len(self.samples) == 0:
-            if test_file is None and instances is None:
-                raise WekaPyException(
-                    "Please provide some test instances either by naming an ARFF test_set, providing a list of Instances, or calling add_test_instance().")
-            if test_file is None:
-                self.create_arff(instances, "test")
-            if instances is None:
-                self.test_file = test_file
-        if len(self.samples) > 0:
-            if test_file is None and instances is None:
-                self.create_arff(self.samples, "test")
-            if test_file is None and instances is not None:
-                self.create_arff(instances, "test")
-            if instances is None and test_file is not None:
-                self.test_file = test_file
-
         print(">>> test")
 
         options = ["java", "-Xmx{}M".format(str(self.max_memory))]
         if self.classpath is not None:
             options.extend(["-cp", self.classpath])
-        options.extend(["weka.classifiers." + str(self.classifier), "-T", self.test_file, "-l", self.model_file, "-p", "0", "-c", "1"])
+        options.extend(["weka.classifiers." + self.classifier, "-T", self.test_file, "-l", self.model_file, "-p", "0", "-c", "1"])
 
         print(">>> test2 ")
 

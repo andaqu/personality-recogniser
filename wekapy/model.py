@@ -94,7 +94,12 @@ class Model:
         if self.classpath is not None:
             options.extend(["-cp", self.classpath])
         options.extend(["weka.classifiers." + self.classifier, "-T", self.test_file, "-l", self.model_file, "-p", "0", "-c", "1"])
+
+        print(">>> test")
+
         process_output, self.time_taken = run_process(options)
+
+        print(">>> test2")
 
         lines = process_output.split("\n")
         instance_predictions = {}

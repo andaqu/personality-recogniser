@@ -40,13 +40,13 @@ class Recogniser:
                     print(f"Personality recognition error: {e.message}")
                 else:
                     print(f"Personality recognition error: {e}")
+                clear(self.session)    
                 return False
 
             for p in preds:
                 y[p][trait] = preds[p]
 
         clear(self.session)
-
         return y
 
 if __name__ == "__main__":

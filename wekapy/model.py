@@ -39,7 +39,7 @@ class Model:
             if i == 0:
                 output_arff.write(f"\t@attribute {self.trait} numeric\n")
                 for name in self.feat:
-                    output_arff.write("\t@attribute " + name + " numeric\n")
+                    output_arff.write(f"\t@attribute {name} numeric\n")
                 output_arff.write("\n@data\n")
             str_to_write = "0,"
             for j, val in enumerate(s):
@@ -69,6 +69,9 @@ class Model:
     # Generate predictions from the trained model from test features in an ARFF file
     def predict(self, test_file=None, instances=None, model_file=None):
         print(">>> test0")
+
+        if test_file is None and instances is None:
+            self.create_arff(self.samples, "test")
 
         print(">>> test")
 

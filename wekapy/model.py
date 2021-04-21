@@ -51,7 +51,7 @@ class Model:
         output_arff.close()
 
         if data_type == "test":
-            self.test_file = self.arff_dir + "/" + str(self.id) + ".arff"
+            self.test_file = p
 
     # Load a model, if it exists, and set this as the currently trained model for this
     # Model instance.
@@ -69,8 +69,7 @@ class Model:
     # Generate predictions from the trained model from test features in an ARFF file
     def predict(self, test_file=None, instances=None, model_file=None):
 
-        if test_file is None and instances is None:
-            self.create_arff(self.samples, "test")
+        self.create_arff(self.samples, "test")
 
         options = ["java", "-Xmx{}M".format(str(self.max_memory))]
         if self.classpath is not None:

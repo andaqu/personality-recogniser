@@ -36,7 +36,10 @@ class Recogniser:
             try:
                 preds = self.models[trait].predict()
             except Exception as e:
-                print(f"Personality recognition error: {e.message}")
+                if hasattr(e, 'message'):
+                    print(f"Personality recognition error: {e.message}")
+                else:
+                    print(f"Personality recognition error: {e}")
                 return False
 
             for p in preds:

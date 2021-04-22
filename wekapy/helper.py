@@ -18,4 +18,4 @@ def run_process(options):
     return process_output, end_time - start_time
 
 def clear(session_id):
-    os.remove(os.path.join(os.path.dirname(__file__), f"temp\\{session_id}.arff"))
+    os.remove(os.path.join(os.path.dirname(__file__), f"temp/{session_id}.arff"))
